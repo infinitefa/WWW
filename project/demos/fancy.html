@@ -1,0 +1,323 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<title>Project Slot Machine</title>
+<link href='http://fonts.googleapis.com/css?family=Gravitas+One&text=1234567' rel='stylesheet' type='text/css'>
+
+<style type="text/css">
+body{
+	background: url(ground.jpg) no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.jSlots-wrapper {
+    overflow: hidden;
+    height: 20px;
+    display: inline-block; /* to size correctly, can use float too, or width*/
+    border: 1px solid #999;
+}
+
+.slot {
+    float: left;
+}
+
+
+
+/* ---------------------------------------------------------------------
+   FANCY EXAMPLE
+--------------------------------------------------------------------- */
+.fancy .jSlots-wrapper {
+    overflow: hidden;
+    height: 100px;
+    display: inline-block; /* to size correctly, can use float too, or width*/
+    border: 1px solid #999;
+}
+
+.fancy .slot li {
+    width: 900px;
+    line-height: 100px;
+    text-align: center;
+    font-size: 70px;
+    font-weight: bold;
+    color: #000;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.8);
+    font-family: Microsoft JhengHei;
+    border-left: 1px solid #999;
+}
+
+.fancy .slot:first-child li {
+    border-left: none;
+	background-color: #0088A8;
+}
+.fancy .slot li span {
+    display: block;
+}
+
+/* ---------------------------------------------------------------------
+   ANIMATIONS
+--------------------------------------------------------------------- */
+
+@-webkit-keyframes winner {
+        0%, 50%, 100% {
+            -webkit-transform: rotate(0deg);
+            font-size:70px;
+            color: #fff;
+        }
+        25% {
+            -webkit-transform: rotate(20deg);
+            font-size:90px;
+            color: #FF16D8;
+        }
+        75% {
+            -webkit-transform: rotate(-20deg);
+            font-size:90px;
+            color: #FF16D8;
+        }
+}
+@-moz-keyframes winner {
+        0%, 50%, 100% {
+            -moz-transform: rotate(0deg);
+            font-size:70px;
+            color: #fff;
+        }
+        25% {
+            -moz-transform: rotate(20deg);
+            font-size:90px;
+            color: #FF16D8;
+        }
+        75% {
+            -moz-transform: rotate(-20deg);
+            font-size:90px;
+            color: #FF16D8;
+        }
+}
+@-ms-keyframes winner {
+        0%, 50%, 100% {
+            -ms-transform: rotate(0deg);
+            font-size:70px;
+            color: #fff;
+        }
+        25% {
+            -ms-transform: rotate(20deg);
+            font-size:90px;
+            color: #FF16D8;
+        }
+        75% {
+            -ms-transform: rotate(-20deg);
+            font-size:90px;
+            color: #FF16D8;
+        }
+}
+
+
+@-webkit-keyframes winnerBox {
+        0%, 50%, 100% {
+            box-shadow: inset 0 0  0px yellow;
+            background-color: #FF0000;
+        }
+        25%, 75% {
+            box-shadow: inset 0 0 30px yellow;
+            background-color: aqua;
+        }
+}
+@-moz-keyframes winnerBox {
+        0%, 50%, 100% {
+            box-shadow: inset 0 0  0px yellow;
+            background-color: #FF0000;
+        }
+        25%, 75% {
+            box-shadow: inset 0 0 30px yellow;
+            background-color: aqua;
+        }
+}
+@-ms-keyframes winnerBox {
+        0%, 50%, 100% {
+            box-shadow: inset 0 0  0px yellow;
+            background-color: #FF0000;
+        }
+        25%, 75% {
+            box-shadow: inset 0 0 30px yellow;
+            background-color: aqua;
+        }
+}
+
+
+
+.winner li {
+    -webkit-animation: winnerBox 2s infinite linear;
+       -moz-animation: winnerBox 2s infinite linear;
+        -ms-animation: winnerBox 2s infinite linear;
+}
+.winner li span {
+     -webkit-animation: winner 2s infinite linear;
+        -moz-animation: winner 2s infinite linear;
+         -ms-animation: winner 2s infinite linear;
+}
+
+.bar {
+	background-image: url(grip.png);
+	height: 100px;
+	position: relative;
+	left: 20px;
+	background-repeat:no-repeat;
+    margin-bottom: 13px;
+	float:left;
+	z-index: 1;
+}
+
+</style>
+
+
+
+</head>
+<body>
+	<div class="container">
+		<div class="fancy" style="float:left;">
+        <ul class="slot" id="food">
+            <!-- In reverse order so the 7s show on load -->
+            <li><span>雞肉飯</span></li>
+            <li><span>6</span></li>
+            <li><span>5</span></li>
+            <li><span>4</span></li>
+            <li><span>3</span></li>
+            <li><span>2</span></li>
+            <li><span>1</span></li>
+        </ul>
+		<!-- input type="button" id="ok" value="OK" --> 
+		<br>
+		<input type="radio" id="bld" name="bld" value="breakfast_lunch">breakfast_lunch
+		<input type="radio" id="bld" name="bld" value="lunch_dinner">lunch_dinner
+		<input type="radio" id="bld" name="bld" value="other"> other		
+		</div>
+	<div class="bar">
+		<audio id="myAudio"><source src="slot.wav" type="audio/wav"></audio>
+		<img id="playFancy" class="move"  src="ball.png" style="position:relative;left:-10px; top:0px; z-index:3" />
+	</div>
+    <div class=map>
+		<iframe id='loc' width='900px' height='200px' frameborder='2' scrolling='no' marginheight='0' marginwidth='0' src='http://maps.google.com.tw/maps?f=q&hl=zh-TW&geocode=&q=嘉義&z=16&output=embed&t='></iframe>
+	</div>
+	
+	<div class="row">
+  <div class="col-sm-4">
+  <div id='coment'>
+  </div>
+  </div>
+	<div class="col-sm-8">
+	<div id='webpage'>
+	</div></div>
+</div>
+</div>
+
+
+    <script src="../jquery.easing.1.3.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../jquery.jSlots.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" charset="utf-8">
+	$(document).ready(function(){
+    $(".move").click(function(){
+		$('#myAudio')[0].play();
+        $(".move").animate({top: "+=80px"});
+		$(".move").delay(120).animate({top: "-=80px"},"slow");
+    });
+	});      
+        // fancy example
+	//------------------------
+
+</script>
+<script type="text/javascript" charset="utf-8">
+function insert(){
+	console.log("OKOKOKOK");
+			var request = new XMLHttpRequest();
+		request.open("POST", "coment_to_db.php");
+		console.log(document.getElementById('comment').value);
+		console.log(document.getElementById('end_num').value);
+		var dat="comment="+document.getElementById('comment').value+"&r_id="+document.getElementById('end_num').value+"&name="+document.getElementById('nam').value;
+		request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		request.send(dat);
+					request.onreadystatechange = function() {
+        // 伺服器請求完成
+        if (request.readyState === 4) {
+            // 伺服器回應成功
+            if (request.status === 200) {
+			check_clearMap = 1;
+                var type = request.getResponseHeader("Content-Type");   // 取得回應類型
+				
+
+                if (type.indexOf("application/json") === 0) { 
+				//document.write(request.responseText);//查responsetext
+				//var qwe=request.responseText;
+				//document.write('"'+qwe+'"');
+                     var data = JSON.parse(request.responseText);
+
+					var htm='';
+					htm=htm+"<form class='form-inline'>";
+					htm=htm+"<input type='text' class='form-control input-sm' name='nam' id='nam' placeholder='NAME'>";
+					htm=htm+"<input type='text' class='form-control input-sm' name='comment' id='comment' placeholder='Write something'>";
+					htm=htm+"<input type='button' class='btn btn-success' onclick='insert()' name='submit' id='c_sub' value='Submit'>";
+					htm=htm+"<input type='hidden' id='end_num' name='postid' value="+document.getElementById('end_num').value+" ><br>";
+					htm=htm+"</form>";
+					htm=htm+"<div class='panel panel-primary'>";
+					htm=htm+"<div class='panel-heading'>Comment</div>";
+					for (i=0;i<data.comment.length;i++)
+					{
+						htm=htm+"<div class='alert alert-info'><span style='color:red;'>"+data.username[i]+" : "+data.comment[i]+"</span></div>";
+					}
+					htm=htm+"</div>";
+					document.getElementById("coment").innerHTML=htm;
+					}
+
+                }
+				} 
+        }
+		
+	
+	
+	
+}
+</script>
+
+<script type="text/javascript" charset="utf-8">
+        $('.fancy .slot').jSlots({
+            number : 1,
+            winnerNumber : 1,
+            spinner : '#playFancy',
+            easing : 'easeOutSine',
+            time : 7000,
+            loops : 10,
+            onStart : function() {
+                $('.slot').removeClass('winner');
+            },
+            onWin : function(winCount, winners) {
+                // only fires if you win
+                
+                $.each(winners, function() {
+                    this.addClass('winner');
+                });
+
+                // react to the # of winning slots                 
+                if ( winCount === 1 ) {
+                    //alert('You got ' + winCount + ' 7!!!');
+                } else if ( winCount > 1 ) {
+                    //alert('You got ' + winCount + ' 7’s!!!');
+                }
+                
+            }
+        });
+        
+    </script>
+
+</body>
+</html>
