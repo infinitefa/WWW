@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<style>
+		header{
+		background-color: black;
+		height:100px;
+		cursor: pointer;
+		
+		}
+		
+		.drop{
+		
+		float :left;
+		font-size: 70px;
+		color : white;
+		text-align:center
+		width :60px;
+		}
+		
+		.drop .droptitle{
+		font-size: 70px;
+		margin:0px;
+		padding:0px;
+		}
+		
+		.drop:hover .droptitle{
+		background-color:#00AA00;
+		}
+		
+		.blocka{
+		display:none;
+		position:absolute;
+		min-width: 200px;
+		z-index: 1;
+		}
+		.blockb{
+		display:none;
+		position:absolute;
+		min-width: 200px;
+		z-index: 1;
+		}
+		.blockc{
+		display:none;
+		position:absolute;
+		min-width: 200px;
+		z-index: 1;
+		}
+		.blockd{
+		display:none;
+		position:absolute;
+		min-width: 200px;
+		z-index: 1;
+		}
+		
+		.drop ul{
+		margin:0px;
+		padding:0px;
+		}
+		
+		.drop ul li{
+		background-color:black;
+		color : white;
+		margin:0px;
+		padding:0px;
+		border: 1px solid white;
+		display:block;
+		}
+		
+		
+		
+		
+		
+		.blocka ul li:hover{
+		background-color:#FF44AA;
+		transform: scale(1.5);
+		}
+		.blockb ul li:hover{
+		background-color:#666666;
+		transform: translateX(-50px);
+		}
+		.blockc ul li:hover{
+		background-color:#FFAA33;
+		transform: rotate(-20deg);
+		}
+		.blockd ul li:hover{
+		background-color:#0000FF;
+		transform: skewX(30deg);
+        transform-origin: 50% 100%;
+		}
+		
+		
+		
+		.drop:hover .blocka{
+		display:block;
+		}
+		.drop:hover .blockb{
+		display:block;
+		}
+		.drop:hover .blockc{
+		display:block;
+		}
+		.drop:hover .blockd{
+		display:block;
+		}
+		
+		
+		header a img{
+		height:100px;
+		padding-top:0px;
+		transition-duration:2s;
+		text-decoration: none;
+		}
+		
+		.scale:hover {
+		transform:scale(2);
+		}
+		
+		.scaleX:hover {
+		transform:scaleX(2);
+		}
+		
+		.rotation:hover {
+		transform:rotate(180deg);
+		}
+		
+		table{
+		box-shadow:10px 10px 5px black;
+		}
+		
+		table ,th ,td{
+		border: 1px solid black;
+		border-collapse: collapse;
+		vertical-align: top;
+		overflow: hidden;
+		z-index: 1;
+		}
+		table th{
+		background-color:#9900FF;
+		padding: 15px;
+		}
+		
+		td:nth-child(1) {
+		background-color: #FFCC22
+		}
+		td:nth-child(2):hover {
+		background-color: #00FF00
+		}
+		
+		table td img{
+		width: 480px;
+		}
+		
+		table td img.one:hover{
+		transform: translateX(100px);
+		transition-duration: 1s;
+		}
+		
+		table td img.two:hover{
+		transform: translateY(-100px);
+		transition-duration: 1s;
+		}
+		
+		footer{
+		background-color:#AAAAAA;
+		}
+		
+		</style>
+	</head>
+	<body>
+		<header>
+		
+		<div class="drop">
+		<p class="droptitle">Block_A</p>
+		<div class = "blocka">
+			<ul>
+			<li><span>A-1</span>
+			</li>
+			<li><span>A-2</span>
+			</li>
+			<li><span>A-3</span>
+			</li>
+			</ul>
+		</div>
+		</div>
+		
+		<div class="drop">
+		<p class="droptitle">Block_B</p>
+			<div class = "blockb">
+			<ul>
+			<li>B-1
+			</li>
+			<li>B-2
+			</li>
+			<li>B-3
+			</li>
+			</ul>
+			</div>
+		</div>
+		
+		<div class="drop">
+		<p class="droptitle">Block_C</p>
+			<div class = "blockc">
+			<ul>
+			<li>C-1
+			</li>
+			<li>C-2
+			</li>
+			<li>C-3
+			</li>
+			</ul>
+			</div>
+		</div>
+		
+		<div class="drop">
+		<p class="droptitle">Block_D</p>
+			<div class = "blockd">
+			<ul>
+			<li>D-1
+			</li>
+			<li>D-2
+			</li>
+			<li>D-3
+			</li>
+			</ul>
+			</div>
+		</div>
+		
+		
+		<div align="right">
+		<a href="https://www.facebook.com">
+		<span><img class ="scale" src='fb_icon.png'/></span></a>
+		<a href="https://www.twitter.com">
+		<span><img class ="scaleX" src='twitter_icon.png'/></span></a>
+		<a href="https://www.linkedin.com/uas/login">
+		<span><img class ="rotation" src='linkin_icon.png'/></span></a>
+		</div>
+		
+		</header>
+		
+		<main>
+		<p>
+		<table align="center">
+		<tr><th colspan = "3" ><b>好友資料</b></th></tr>
+		<tr><td>姓名</td><td>海馬瀨人</td>
+		<td rowspan = "4"><img src = "man1.png" alt = "picture1" class="one"/></td></tr>
+		<tr><td>性別</td><td>男</td></tr>
+		<tr><td>學號</td><td>05270411</td></tr>
+		<td>興趣</td><td>決鬥</td></tr>
+		</table>
+		
+		<br></br>
+		<table align="center">
+		<tr><th colspan = "3"><b>好友資料</b></th></tr>
+		<tr><td>姓名</td><td>亞圖姆</td>
+		<td rowspan = "4"><img src = "man2.png" alt = "picture2" class="two"/></td></tr>
+		<tr><td>性別</td><td>男</td></tr>
+		<tr><td>學號</td><td>05270547</td></tr>
+		<td>興趣</td><td>決鬥</td></tr>
+		</table>
+		</p>
+		</main>
+		<footer><marquee>吳憲發<a  href="mailto:whf102u.cs.ccu.edu.tw">whf102u@cs.ccu.edu.tw</a></marquee></footer>
+	</body>
+</html>

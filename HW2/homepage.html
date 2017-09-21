@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- <script type="text/javascript" src="javascript.js"></script>
+		-->
+		<style>
+		body {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+		flex-direction: column;
+		}
+		</style>
+	</head>
+<body>
+	
+	<h1>Enter XML file</h1>
+	<form name="myform" method="POST" id="location">
+	<input type="text" id = "xmlPath" name="URL" maxlength="255" size="50"/>
+	<br /><br />
+	<a href=./MLB.xml >View XSL result for MLB.xml</a>
+	<br />
+	<input type="button" name="submit" value="Submit Query" id = 'load'/>
+	</form>
+	<p id="demo"></p>
+
+	<script>
+	document.getElementById("load").onclick =function loadXML(){
+		//document.getElementById('load').;
+		var URL = document.getElementById('xmlPath').value;
+		if(URL == '')
+		{
+		alert("Error,Please input XML url.");
+		}
+		console.log(URL);
+		xmlhttp = new XMLHttpRequest();
+		
+		xmlhttp.onreadystatechange = function() {
+		if (xmlhttp.readyState === xmlhttp.DONE && xmlhttp.status === 200) 
+		{
+		if(URL.match('train.xml')){train_table(xmlhttp);}
+		else if(URL.match('MLB.xml')){MLB_table(xmlhttp);}
+		}
+		};
+		xmlhttp.open("GET",URL,true);
+		xmlhttp.send();
+	}
+	
+	function train_table(xmlhttp)
+	{
+	xmlDoc = xmlhttp.responseXML;
+	root = xmlDoc.DocumentElement;
+	var i,j;
+	html_text="<html><head><title>XML Parse Result</title>";
+	html_text+="<style>tr th { color:white; background-color:#008080; text-align:left;} tr td{background-color:#DDDDDD;}</style>"
+	html_text+="</head><body><caption><b>Train</b></caption>";
+	html_text+="<table style='border-collapse:collapse';>";
+	var x = xmlDoc.getElementsByTagName("train");
+	for(i = 0;i < x.length;i++)
+	{
+	html_text+="<tr><th colspan='5'>"+x[i].childNodes[3].childNodes[0].nodeValue+'-'+x[i].childNodes[1].childNodes[0].nodeValue+"</th></tr>";
+	html_text+="<tr>";
+	var y = x[i].childNodes;
+	console.log(y);
+	for(j=5;j<y.length;j+=4)
+	{
+	if(j==5||j==21)
+	html_text+="<td><b>"+x[i].childNodes[j].childNodes[0].nodeValue+"</b>";
+	else
+	html_text+="<td>"+x[i].childNodes[j].childNodes[0].nodeValue;
+	
+	if(j != 21)
+	html_text+="--->"+"</td>";
+	else
+	html_text+="</td>";
+	
+	
+	}
+	html_text+="</tr><tr>";
+	for(j=7;j<y.length;j+=4)
+	{html_text+="<td>"+x[i].childNodes[j].childNodes[0].nodeValue+"</td>";}
+	html_text+="</tr>";
+	}
+	html_text+="</table></body></html>";
+	hWin = window.open("", "HW2_train", "height=800,width=1200");
+	hWin.document.write(html_text);
+	}//*/
+	
+	function MLB_table(xmlhttp)
+	{
+	var i,j;
+	xmlDoc = xmlhttp.responseXML;
+	root = xmlDoc.DocumentElement;
+	html_text="<html><head><title>XML Parse Result</title>";
+	html_text+="<style></style>"
+	html_text+="</head><body><caption><b>Baseball</b></caption>";
+	
+	var x = xmlDoc.getElementsByTagName("baseball");
+	console.log(x[0].childNodes);
+	for(i = 0;i < x.length;i++)
+	{
+	var y = x[i].childNodes;
+	var s = y[11].childNodes;
+	console.log(s[3]);
+	html_text+="<table border='2'; "+"style = 'background-color:"+y[7].childNodes[0].nodeValue+"; color:"+y[5].childNodes[0].nodeValue+"'>";
+	html_text+="<tr><th colspan = '5'>"+y[1].childNodes[0].nodeValue+"</th></tr>";
+	html_text+="<tr><th>"+y[9].nodeName+"</th><th colspan = '2'>"+y[11].nodeName+"</th><th>"+y[13].nodeName+"</th><th>"+y[3].nodeName+"</th></tr>";
+	html_text+="<tr><td><img src='"+y[9].childNodes[0].nodeValue+"' height='40' width='40'></td>";
+	html_text+="<td>"+s[1].childNodes[0].nodeValue+"</td><td>Birth:"+s[3].childNodes[0].nodeValue+"</td>";
+	html_text+="<td>"+y[13].childNodes[0].nodeValue+"</td><td>"+y[3].childNodes[0].nodeValue+"</td></tr>";
+	html_text+="<tr><th colspan = '5'><iframe allowfullscreen width='560' height='315' src = '"+y[15].childNodes[0].nodeValue + "'; frameborader='0';></iframe></th></tr>";
+	html_text+="</table>";
+	console.log(html_text);
+	}
+	
+	html_text+="</body></html>";
+	console.log(html_text);
+	hWin = window.open("", "HW2_MLB", "height=800,width=1200");
+	hWin.document.write(html_text);
+	}
+	</script>
+</body>
+</html>
